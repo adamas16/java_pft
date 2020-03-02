@@ -1,21 +1,19 @@
 public class MyFirstProgram{
-	public static void main(String[] args) {
+	public static double x1, y1, x2, y2;
 
-		hello("men");
-		hello("world");
+	public static void main(String[] args)
+	{
+		Point p1 = new Point(4,6);
+		Point p2 = new Point(7,10);
+		System.out.println("Расстояние между двумя точками  p1(" + p1.a + "," + p1.b + ") и p2(" + p2.a + "," + p2.b + ") = " + distance1(p1,p2));
 
-		Point p1 = new Point(3.0, 5.0);
-		Point p2 = new Point(7.0, 8.0);
-
-		System.out.println("Расстояние между точкой p1 и p2 составляет" + " " + distance(p1, p2));
+		System.out.println("Расстояние между двумя точками  p1(" + p1.a + "," + p1.b + ") и p2(" + p2.a + "," + p2.b + ") = " + p1.distance(p1,p2));
 	}
 
-	public static double distance(Point p1, Point p2) {
-		double distance = Math.round(Math.sqrt((p2.x - p1.x)*(p2.x - p1.x)+(p2.y - p1.y)*(p2.y - p1.y)));
-		return distance;
+	public static double distance1(Point p1, Point p2)
+	{
+		return Math.sqrt((p1.a-p2.a)*(p1.a-p2.a) + (p1.b-p2.b)*(p1.b-p2.b));
 	}
 
-	public static void hello(String somebody){
-		System.out.println("Hello, " + somebody + "!");
-	}
+
 }
