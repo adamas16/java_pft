@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="162f3f7e-6e9f-4963-ae73-a9dea76348e4" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view />
+      </state>
+    </system>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.16015625" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RunManager">
+    <configuration name="MyFirstProgram" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MyFirstProgram" />
+      <module name="sandbox.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MyFirstProgram" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="2516" height="403" key="GridCell.Tab.0.bottom" timestamp="1583179126484">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state width="2516" height="403" key="GridCell.Tab.0.bottom/0.0.2560.1440@0.0.2560.1440" timestamp="1583179126484" />
+    <state width="2516" height="403" key="GridCell.Tab.0.center" timestamp="1583179126484">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state width="2516" height="403" key="GridCell.Tab.0.center/0.0.2560.1440@0.0.2560.1440" timestamp="1583179126484" />
+    <state width="2516" height="403" key="GridCell.Tab.0.left" timestamp="1583179126484">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state width="2516" height="403" key="GridCell.Tab.0.left/0.0.2560.1440@0.0.2560.1440" timestamp="1583179126484" />
+    <state width="2516" height="403" key="GridCell.Tab.0.right" timestamp="1583179126484">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state width="2516" height="403" key="GridCell.Tab.0.right/0.0.2560.1440@0.0.2560.1440" timestamp="1583179126484" />
+    <state x="760" y="293" key="SettingsEditor" timestamp="1583179185453">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="760" y="293" key="SettingsEditor/0.0.2560.1440@0.0.2560.1440" timestamp="1583179185453" />
+  </component>
+</project>

@@ -1,4 +1,5 @@
 public class MyFirstProgram{
+<<<<<<< HEAD
 	public static double x1, y1, x2, y2;
 
 	public static void main(String[] args)
@@ -16,4 +17,9 @@ public class MyFirstProgram{
 	}
 
 
+=======
+	public static void main(String[] args) {
+		System.out.println("Hello, world!");	
+	}
+>>>>>>> parent of d9ae437... Задание 2
 }
