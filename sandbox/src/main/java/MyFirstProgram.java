@@ -1,5 +1,5 @@
 public class MyFirstProgram{
-
+<<<<<<< HEAD
 	public static double x1, y1, x2, y2;
 
 	public static void main(String[] args)
@@ -16,4 +16,10 @@ public class MyFirstProgram{
 		return Math.sqrt((p1.a-p2.a)*(p1.a-p2.a) + (p1.b-p2.b)*(p1.b-p2.b));
 	}
 
+
+=======
+	public static void main(String[] args) {
+		System.out.println("Hello, world!");	
+	}
+>>>>>>> parent of d9ae437... Задание 2
 }
