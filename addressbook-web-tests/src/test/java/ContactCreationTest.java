@@ -1,4 +1,4 @@
-import addressbook_tests.ContactDataParametrs;
+import addressbook_tests_parametrs.ContactDataParametrs;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;

@@ -1,4 +1,4 @@
-package addressbook_tests;
+package addressbook_tests_parametrs;
 
 public class ContactDataParametrs {
     private final String name;
