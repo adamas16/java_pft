@@ -1,3 +1,4 @@
+import addressbook_tests.ContactDataParametrs;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
@@ -23,7 +24,7 @@ public class ContactCreationTest {
     public void testContactCreation() throws Exception {
         autoLogin("admin", "secret");
         initContactCreation();
-        fillContactForm("Dmitriy", "Sergeevich", "Romanov", "arrnel", "random title", "Russia", "+7(658)4853568", "random@mail.org", "4", "July", "1954");
+        fillContactForm(new ContactDataParametrs("Dmitriy", "Sergeevich", "Romanov", "arrnel", "random title", "Russia", "+7(658)4853568", "random@mail.org", "4", "July", "1954"));
         submitContactCreation();
         clickLogo();
     }
@@ -43,42 +44,42 @@ public class ContactCreationTest {
         driver.findElement(By.linkText("add new")).click();
     }
 
-    private void fillContactForm(String name, String patronymic, String lastName, String nickName, String title, String country, String phone, String mail, String bDay, String bMonth, String bYear) {
+    private void fillContactForm(ContactDataParametrs contactDataParametrs) {
         driver.findElement(By.name("firstname")).click();
         driver.findElement(By.name("firstname")).clear();
-        driver.findElement(By.name("firstname")).sendKeys(name);
+        driver.findElement(By.name("firstname")).sendKeys(contactDataParametrs.getName());
         driver.findElement(By.name("middlename")).clear();
-        driver.findElement(By.name("middlename")).sendKeys(patronymic);
+        driver.findElement(By.name("middlename")).sendKeys(contactDataParametrs.getPatronymic());
         driver.findElement(By.name("lastname")).click();
         driver.findElement(By.name("lastname")).clear();
-        driver.findElement(By.name("lastname")).sendKeys(lastName);
+        driver.findElement(By.name("lastname")).sendKeys(contactDataParametrs.getLastName());
         driver.findElement(By.name("nickname")).click();
         driver.findElement(By.name("nickname")).clear();
-        driver.findElement(By.name("nickname")).sendKeys(nickName);
+        driver.findElement(By.name("nickname")).sendKeys(contactDataParametrs.getNickName());
 
         driver.findElement(By.name("title")).click();
         driver.findElement(By.name("title")).clear();
-        driver.findElement(By.name("title")).sendKeys(title);
+        driver.findElement(By.name("title")).sendKeys(contactDataParametrs.getTitle());
         driver.findElement(By.name("address")).click();
         driver.findElement(By.name("address")).clear();
-        driver.findElement(By.name("address")).sendKeys(country);
+        driver.findElement(By.name("address")).sendKeys(contactDataParametrs.getCountry());
         driver.findElement(By.name("mobile")).click();
         driver.findElement(By.name("mobile")).clear();
-        driver.findElement(By.name("mobile")).sendKeys(phone);
+        driver.findElement(By.name("mobile")).sendKeys(contactDataParametrs.getPhone());
 
         driver.findElement(By.name("email")).click();
         driver.findElement(By.name("email")).clear();
-        driver.findElement(By.name("email")).sendKeys(mail);
+        driver.findElement(By.name("email")).sendKeys(contactDataParametrs.getMail());
 
         driver.findElement(By.name("bday")).click();
-        new Select(driver.findElement(By.name("bday"))).selectByVisibleText(bDay);
+        new Select(driver.findElement(By.name("bday"))).selectByVisibleText(contactDataParametrs.getbDay());
         driver.findElement(By.name("bday")).click();
         driver.findElement(By.name("bmonth")).click();
-        new Select(driver.findElement(By.name("bmonth"))).selectByVisibleText(bMonth);
+        new Select(driver.findElement(By.name("bmonth"))).selectByVisibleText(contactDataParametrs.getbMonth());
         driver.findElement(By.name("bmonth")).click();
         driver.findElement(By.name("byear")).click();
         driver.findElement(By.name("byear")).clear();
-        driver.findElement(By.name("byear")).sendKeys(bYear);
+        driver.findElement(By.name("byear")).sendKeys(contactDataParametrs.getbYear());
         driver.findElement(By.name("new_group")).click();
     }
 

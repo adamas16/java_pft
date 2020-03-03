@@ -1,0 +1,17 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.testng:testng:7.0.0'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+    compile group: 'io.qameta.allure', name: 'allure-junit4', version: '2.13.2'
+
+}
+
+test {
+    useTestNG()
+    systemProperty "file.encoding", "utf-8"
+}

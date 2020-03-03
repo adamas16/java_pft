@@ -1,3 +1,4 @@
+import addressbook_tests.GroupDataParametrs;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
@@ -24,7 +25,7 @@ public class GroupCreationTest {
         autoLogin("admin", "secret");
         gotoGroupPage();
         initGroupCreation();
-        fillGroupForm("test1", "test2", "test3");
+        fillGroupForm(new GroupDataParametrs("test1", "test2", "test3"));
         submitGroupCreation();
         returnToGroupPage();
         logout();
@@ -50,16 +51,16 @@ public class GroupCreationTest {
         driver.findElement(By.name("new")).click();
     }
 
-    private void fillGroupForm(String name, String header, String footer) {
+    private void fillGroupForm(GroupDataParametrs groupDataParametrs) {
         driver.findElement(By.name("group_name")).click();
         driver.findElement(By.name("group_name")).clear();
-        driver.findElement(By.name("group_name")).sendKeys(name);
+        driver.findElement(By.name("group_name")).sendKeys(groupDataParametrs.getName());
         driver.findElement(By.name("group_header")).click();
         driver.findElement(By.name("group_header")).clear();
-        driver.findElement(By.name("group_header")).sendKeys(header);
+        driver.findElement(By.name("group_header")).sendKeys(groupDataParametrs.getHeader());
         driver.findElement(By.name("group_footer")).click();
         driver.findElement(By.name("group_footer")).clear();
-        driver.findElement(By.name("group_footer")).sendKeys(footer);
+        driver.findElement(By.name("group_footer")).sendKeys(groupDataParametrs.getFooter());
     }
 
     private void submitGroupCreation() {
