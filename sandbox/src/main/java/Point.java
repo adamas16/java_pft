@@ -1,15 +1,24 @@
-public class Point
-{
-    public double a;
-    public double b;
+public class Point {
 
-    public Point (double a, double b)
-    {
-        this.a= a;
-        this.b= b;
+    public double x;
+    public double y;
+
+    public Point (double x, double y){
+        this.x = x;
+        this.y = y;
     }
-    public double distance(Point p1, Point p2)
-    {
-        return Math.sqrt((p1.a-p2.a)*(p1.a-p2.a) + (p1.b-p2.b)*(p1.b-p2.b));
+
+    public double secondX(){
+        return x;
     }
+
+    public double secondY(){
+        return y;
+    }
+
+    public double distance(Point second){
+        double d = Math.round(Math.sqrt(second.secondX() - x)*(second.secondX() - x)+((second.secondY() - y)*(secondY() - y)));
+        return d;
+    }
+
 }
