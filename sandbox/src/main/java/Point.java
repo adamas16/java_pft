@@ -17,7 +17,7 @@ public class Point {
     }
 
     public double distance(Point second){
-        double d = Math.round(Math.sqrt(second.secondX() - x)*(second.secondX() - x)+((second.secondY() - y)*(secondY() - y)));
+        double d = Math.round(Math.sqrt((second.secondX() - x)*(second.secondX() - x)+(second.secondY() - y)*(second.secondY() - y)));
         return d;
     }
 
