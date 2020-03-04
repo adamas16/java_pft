@@ -1,17 +1,17 @@
 package addressbook_tests_parametrs;
 
 public class ContactDataParametrs {
-    private final String name;
-    private final String patronymic;
-    private final String lastName;
-    private final String nickName;
-    private final String title;
-    private final String country;
-    private final String phone;
-    private final String mail;
-    private final String bDay;
-    private final String bMonth;
-    private final String bYear;
+    public final String name;
+    public final String patronymic;
+    public final String lastName;
+    public final String nickName;
+    public final String title;
+    public final String country;
+    public final String phone;
+    public final String mail;
+    public final String bDay;
+    public final String bMonth;
+    public final String bYear;
 
     public ContactDataParametrs(String name, String patronymic, String lastName, String nickName, String title, String country, String phone, String mail, String bDay, String bMonth, String bYear) {
         this.name = name;

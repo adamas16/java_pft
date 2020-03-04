@@ -1,9 +1,9 @@
 package addressbook_tests_parametrs;
 
 public class GroupDataParametrs {
-    private final String name;
-    private final String header;
-    private final String footer;
+    public final String name;
+    public final String header;
+    public final String footer;
 
     public GroupDataParametrs(String name, String header, String footer) {
         this.name = name;
