@@ -1,6 +1,5 @@
 package tests;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 
@@ -14,6 +13,7 @@ public class GroupDeletionTest extends TestBase{
         app.getGroupHelper().submitGroupDeletion();
         app.getNavigationHelper().returnToGroupPage();
         app.getSessionHelper().logout();
+        tearDown();
     }
 
 }
