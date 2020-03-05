@@ -33,16 +33,25 @@ public class HelperBase {
 
     public void type(By locator, String text) {
         click(locator);
-        clear(locator);
-        sendText(locator, text);
+        if (text != null) {
+            String existingText = driver.findElement(locator).getAttribute("value");
+            if (!text.equals(existingText)){
+                clear(locator);
+                sendText(locator, text);
+            }
+        }
     }
 
-    private void clear(By locator) {
+    public void clear(By locator) {
         driver.findElement(locator).clear();
     }
 
-    private void sendText(By locator, String text) {
+    public void sendText(By locator, String text) {
         driver.findElement(locator).sendKeys(text);
+    }
+
+    public void getAttrib(By locator, String value){
+
     }
 
     public boolean isElementPresent(By by) {
