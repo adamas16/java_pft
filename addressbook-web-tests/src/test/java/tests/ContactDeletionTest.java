@@ -11,7 +11,6 @@ public class ContactDeletionTest extends TestBase{
         app.getContactHelper().submitContactDeletion();
         app.getNavigationHelper().gotoMainPage();
         app.getSessionHelper().logout();
-        tearDown();
     }
 
 }

@@ -13,9 +13,9 @@ public class HelperBase {
         this.driver = driver;
     }
 
-    public void alertAccept() {
-        driver.switchTo().alert().accept();
-    }
+//    public void alertAccept() {
+//        driver.switchTo().alert().accept();
+//    }
 
     public void selectByVisibilityTextMethod(By locator, String text) {
         click(locator);
