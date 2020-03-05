@@ -2,6 +2,11 @@ package appmanager;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.safari.SafariDriver;
+
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager{
@@ -12,10 +17,25 @@ public class ApplicationManager{
     private NavigationHelper navigationHelper;
     private GroupHelper groupHelper;
     private SessionHelper sessionHelper;
+    public String browser;
+
+    public ApplicationManager(String browser) {
+        this.browser = browser;
+    }
 
 
     public void init() {
-        driver = new ChromeDriver();
+        String browser = BrowserType.GOOGLECHROME;
+        if (browser == BrowserType.GOOGLECHROME){
+            driver = new ChromeDriver();
+        } else if (browser == BrowserType.FIREFOX){
+            driver = new FirefoxDriver();
+        } else if (browser == BrowserType.IE){
+            driver = new InternetExplorerDriver();
+        } else if (browser == BrowserType.SAFARI){
+            driver = new SafariDriver();
+        }
+
         groupHelper = new GroupHelper(driver);
         navigationHelper = new NavigationHelper(driver);
         sessionHelper = new SessionHelper(driver);
