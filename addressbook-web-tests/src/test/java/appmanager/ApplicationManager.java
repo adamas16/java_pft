@@ -26,13 +26,13 @@ public class ApplicationManager{
 
     public void init() {
         String browser = BrowserType.GOOGLECHROME;
-        if (browser == BrowserType.GOOGLECHROME){
+        if (browser.equals(BrowserType.GOOGLECHROME)){
             driver = new ChromeDriver();
-        } else if (browser == BrowserType.FIREFOX){
+        } else if (browser.equals(BrowserType.FIREFOX)){
             driver = new FirefoxDriver();
-        } else if (browser == BrowserType.IE){
+        } else if (browser.equals(BrowserType.IE)){
             driver = new InternetExplorerDriver();
-        } else if (browser == BrowserType.SAFARI){
+        } else if (browser.equals(BrowserType.SAFARI)){
             driver = new SafariDriver();
         }
 
