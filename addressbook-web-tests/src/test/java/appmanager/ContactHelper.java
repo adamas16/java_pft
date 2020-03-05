@@ -34,8 +34,30 @@ public class ContactHelper extends HelperBase{
         click(By.name("new_group"));
     }
 
+    public void updateContactForm(ContactDataParametrs contactDataParametrs) {
+        type(By.name("firstname"), contactDataParametrs.getName());
+        type(By.name("middlename"),contactDataParametrs.getPatronymic());
+        type(By.name("lastname"), contactDataParametrs.getLastName());
+        type(By.name("nickname"), contactDataParametrs.getNickName());
+
+        type(By.name("title"), contactDataParametrs.getTitle());
+        type(By.name("address"), contactDataParametrs.getCountry());
+        type(By.name("mobile"), contactDataParametrs.getPhone());
+
+        type(By.name("email"), contactDataParametrs.getMail());
+
+        selectByVisibilityTextMethod(By.name("bday"), contactDataParametrs.getbDay());
+        selectByVisibilityTextMethod(By.name("bmonth"), contactDataParametrs.getbMonth());
+        type(By.name("byear"), contactDataParametrs.getbYear());
+    }
+
+
     public void selectContact(){
         click(By.xpath("(//input[@name=\"selected[]\"])[1]"));
+    }
+
+    public void initContactEdition(){
+        click(By.xpath("(//img[@title=\"Edit\"])[1]"));
     }
 
     public void initContactCreation() {
@@ -45,5 +67,10 @@ public class ContactHelper extends HelperBase{
     public void submitContactCreation() {
         click(By.xpath("(//input[@name='submit'])[2]"));
     }
+
+    public void updateButton() {
+        click(By.xpath("//input[@name=\"update\"]"));
+    }
+
 
 }
