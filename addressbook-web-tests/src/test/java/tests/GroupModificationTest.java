@@ -7,7 +7,6 @@ public class GroupModificationTest extends TestBase{
 
     @Test
     public void testGroupModification(){
-        app.getSessionHelper().autoLogin("admin", "secret");
         app.getNavigationHelper().gotoGroupPage();
         app.getGroupHelper().selectGroup();
         app.getGroupHelper().submitGroupEdition();

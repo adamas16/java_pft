@@ -41,6 +41,7 @@ public class ApplicationManager{
         sessionHelper = new SessionHelper(driver);
         contactHelper = new ContactHelper(driver);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        getSessionHelper().autoLogin("admin", "secret");
     }
 
     public void stop() {

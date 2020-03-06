@@ -9,7 +9,6 @@ public class GroupCreationTest extends TestBase{
 
     @Test
     public void testGroupCreationTests() throws Exception {
-        app.getSessionHelper().autoLogin("admin", "secret");
         app.getNavigationHelper().gotoGroupPage();
         app.getGroupHelper().initGroupCreation();
         app.getGroupHelper().fillGroupForm(new GroupDataParametrs("test1", null, null));
