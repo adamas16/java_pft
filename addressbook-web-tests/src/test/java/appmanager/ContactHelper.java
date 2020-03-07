@@ -4,6 +4,7 @@ import addressbook_tests_parametrs.ContactDataParametrs;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 public class ContactHelper extends HelperBase{
 
@@ -16,7 +17,7 @@ public class ContactHelper extends HelperBase{
         isAlertPresent();
     }
 
-    public void fillContactForm(ContactDataParametrs contactDataParametrs) {
+    public void fillContactForm(ContactDataParametrs contactDataParametrs, boolean creation) {
         type(By.name("firstname"), contactDataParametrs.getName());
         type(By.name("middlename"),contactDataParametrs.getPatronymic());
         type(By.name("lastname"), contactDataParametrs.getLastName());
@@ -31,24 +32,11 @@ public class ContactHelper extends HelperBase{
         selectByVisibilityTextMethod(By.name("bday"), contactDataParametrs.getbDay());
         selectByVisibilityTextMethod(By.name("bmonth"), contactDataParametrs.getbMonth());
         type(By.name("byear"), contactDataParametrs.getbYear());
-        click(By.name("new_group"));
-    }
-
-    public void updateContactForm(ContactDataParametrs contactDataParametrs) {
-        type(By.name("firstname"), contactDataParametrs.getName());
-        type(By.name("middlename"),contactDataParametrs.getPatronymic());
-        type(By.name("lastname"), contactDataParametrs.getLastName());
-        type(By.name("nickname"), contactDataParametrs.getNickName());
-
-        type(By.name("title"), contactDataParametrs.getTitle());
-        type(By.name("address"), contactDataParametrs.getCountry());
-        type(By.name("mobile"), contactDataParametrs.getPhone());
-
-        type(By.name("email"), contactDataParametrs.getMail());
-
-        selectByVisibilityTextMethod(By.name("bday"), contactDataParametrs.getbDay());
-        selectByVisibilityTextMethod(By.name("bmonth"), contactDataParametrs.getbMonth());
-        type(By.name("byear"), contactDataParametrs.getbYear());
+        if (creation){
+            selectByVisibilityTextMethod(By.name("new_group"),"test1");
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        }
     }
 
 

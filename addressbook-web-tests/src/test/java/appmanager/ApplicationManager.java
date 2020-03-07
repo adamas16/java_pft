@@ -40,7 +40,7 @@ public class ApplicationManager{
         navigationHelper = new NavigationHelper(driver);
         sessionHelper = new SessionHelper(driver);
         contactHelper = new ContactHelper(driver);
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         getSessionHelper().autoLogin("admin", "secret");
     }
 

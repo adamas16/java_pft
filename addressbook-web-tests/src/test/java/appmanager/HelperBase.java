@@ -50,10 +50,6 @@ public class HelperBase {
         driver.findElement(locator).sendKeys(text);
     }
 
-    public void getAttrib(By locator, String value){
-
-    }
-
     public boolean isElementPresent(By by) {
         try {
             driver.findElement(by);
