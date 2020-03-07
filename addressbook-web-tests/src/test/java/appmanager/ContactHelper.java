@@ -1,6 +1,7 @@
 package appmanager;
 
 import addressbook_tests_parametrs.ContactDataParametrs;
+import addressbook_tests_parametrs.GroupDataParametrs;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
@@ -60,5 +61,20 @@ public class ContactHelper extends HelperBase{
         click(By.xpath("//input[@name=\"update\"]"));
     }
 
+    public void createContact(ContactDataParametrs contactDataParametrs, boolean creation) throws InterruptedException {
+        initContactCreation();
+        fillContactForm(contactDataParametrs,creation);
+        submitContactCreation();
+        gotoHomePage();
+        refresh();
+    }
+
+    public void gotoHomePage() {
+        click(By.linkText("home"));
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.xpath("//img[@title=\"Details\"]"));
+    }
 
 }

@@ -1,6 +1,6 @@
 package addressbook_tests_parametrs;
 
-public class ContactDataParametrs {
+public class ContactDataParametrs{
     public final String name;
     public final String patronymic;
     public final String lastName;

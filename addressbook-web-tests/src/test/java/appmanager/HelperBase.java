@@ -68,5 +68,8 @@ public class HelperBase {
             return false;
         }
     }
+    public void refresh(){
+        driver.navigate().refresh();
+    }
 
 }
