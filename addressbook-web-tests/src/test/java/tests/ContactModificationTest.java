@@ -5,6 +5,7 @@ import addressbook_tests_parametrs.GroupDataParametrs;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class ContactModificationTest extends TestBase{
@@ -30,8 +31,9 @@ public class ContactModificationTest extends TestBase{
 //      нажатие на кнопку редактировать
         app.getContactHelper().initContactEdition(contactCountBefore.size() - 1);
 
+        ContactDataParametrs contact = new ContactDataParametrs("Dmitriy", "Sergeevich", "Romanov", "arrnel", "random title", "Russia", "+7(658)4853568", "random@mail.org", "4", "July", "1954");
 //      заполнение формы
-        app.getContactHelper().fillContactForm(new ContactDataParametrs("Dmitriy_edit", "Sergeevich_edit", "Romanov_edit", "arrnel_edit", "random title_edit", "Russia_edit", "+7(658)4853568", "random_edit@mail.org", "7", "June", "1989"),false);
+        app.getContactHelper().fillContactForm(contact,false);
 
 //      нажать на обновить контакт
         app.getContactHelper().updateButton();
@@ -46,6 +48,9 @@ public class ContactModificationTest extends TestBase{
 //      Проверяем количество контактов до и после
         Assert.assertEquals(contactCountBefore.size(), contactCountAfter.size());
 
+        contactCountBefore.remove(contactCountBefore.size() -1);
+        contactCountBefore.add(contact);
+        Assert.assertEquals(new HashSet<Object>(contactCountBefore), new HashSet<Object>(contactCountAfter));
 
 //      выход из аккаунта
         app.getSessionHelper().logout();

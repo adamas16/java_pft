@@ -18,7 +18,7 @@ public class GroupDeletionTest extends TestBase{
 
 //      проверка наличия группы
         if(!app.getGroupHelper().isThereAGroup()){
-            app.getGroupHelper().createGroup(new GroupDataParametrs("test1", "test2_edited", "test3_edited"));
+            app.getGroupHelper().createGroup(new GroupDataParametrs("test1", "test2", "test3"));
         }
 
 //      Получаем количество групп

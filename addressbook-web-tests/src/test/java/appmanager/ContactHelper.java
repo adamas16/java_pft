@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
+import java.nio.file.WatchEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +51,7 @@ public class ContactHelper extends HelperBase{
 
     public void initContactEdition(int index){
         driver.findElements(By.xpath("//img[@title=\"Edit\"]")).get(index).click();
-        System.out.println(index);
+        System.out.println("Номер контакта = " + (index + 1));
     }
 
     public void initContactCreation() {
@@ -82,11 +83,16 @@ public class ContactHelper extends HelperBase{
     }
 
     public List<ContactDataParametrs> getContactList() {
-        List <ContactDataParametrs> contacts = new ArrayList <ContactDataParametrs>();
-        List <WebElement> elements = driver.findElements(By.xpath("//img[@title=\"Details\"]"));
-        for (WebElement element: elements){
-            String name = element.getText();
-            ContactDataParametrs contact = new ContactDataParametrs(name, "Sergeevich_edit", "Romanov_edit", "arrnel_edit", "random title_edit", null, null, null, null, null, null);
+        List<ContactDataParametrs> contacts = new ArrayList<ContactDataParametrs>();
+        List<WebElement> elements = driver.findElements(By.name("entry"));
+        for (WebElement element : elements) {
+            List<WebElement> contactEntryList = element.findElements(By.cssSelector("td"));
+            WebElement nameCell = contactEntryList.get(2);
+            String name = nameCell.getText();
+            WebElement lastnameCell = contactEntryList.get(1);
+            String lastname = lastnameCell.getText();
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
+            ContactDataParametrs contact = new ContactDataParametrs(name, "Sergeevich", lastname,null, null, null, null, null,null, null, null);
             contacts.add(contact);
         }
         return contacts;

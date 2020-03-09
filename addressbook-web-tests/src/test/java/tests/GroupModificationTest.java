@@ -4,6 +4,7 @@ import addressbook_tests_parametrs.GroupDataParametrs;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class GroupModificationTest extends TestBase{
@@ -18,7 +19,7 @@ public class GroupModificationTest extends TestBase{
 
 //      проверка наличия группы
         if(!app.getGroupHelper().isThereAGroup()){
-            app.getGroupHelper().createGroup(new GroupDataParametrs("test1", "test2_edited", "test3_edited"));
+            app.getGroupHelper().createGroup(new GroupDataParametrs("test1", "test2", "test3"));
         }
 
 //      Получаем количество групп
@@ -31,8 +32,11 @@ public class GroupModificationTest extends TestBase{
 //      нажатие на кнопку изменить
         app.getGroupHelper().submitGroupEdition();
 
+//
+        GroupDataParametrs group = new GroupDataParametrs("test1", "test2", "test3");
+
 //      заполнение формы
-        app.getGroupHelper().fillGroupForm(new GroupDataParametrs("test1", "test2_edited", "test3_edited"));
+        app.getGroupHelper().fillGroupForm(group);
 
 //      подтверждение изменения
         app.getContactHelper().updateButton();
@@ -47,6 +51,9 @@ public class GroupModificationTest extends TestBase{
 //      Проверяем количество групп до и после
         Assert.assertEquals(groupCountAfter.size(), groupCountBefore.size());
 
+        groupCountBefore.remove(groupCountBefore.size() -1);
+        groupCountBefore.add(group);
+        Assert.assertEquals(new HashSet<Object>(groupCountBefore), new HashSet<Object>(groupCountAfter));
 
 //      выход из аккаунта
         app.getSessionHelper().logout();
