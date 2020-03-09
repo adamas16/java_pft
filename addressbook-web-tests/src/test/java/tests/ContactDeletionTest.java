@@ -5,11 +5,12 @@ import addressbook_tests_parametrs.GroupDataParametrs;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 public class ContactDeletionTest extends TestBase{
 
-    public int contactCountBefore;
-    public int contactCountAfter;
-
+    public List<ContactDataParametrs> contactCountBefore;
+    public List<ContactDataParametrs> contactCountAfter;
     @Test
     public void testContactDeletion() throws Exception {
 //        проверка наличия контакта
@@ -24,10 +25,10 @@ public class ContactDeletionTest extends TestBase{
         }
 
 //      Получаем количество контактов
-        contactCountBefore = app.getGroupHelper().groupCount();
+        contactCountBefore = app.getContactHelper().getContactList();
 
 //      выбор контакта
-        app.getContactHelper().selectContact(contactCountBefore - 1);
+        app.getContactHelper().selectContact(contactCountBefore.size() - 1);
 
 //      нажатие на кнопку удаления контакта
         app.getContactHelper().submitContactDeletion();
@@ -36,10 +37,13 @@ public class ContactDeletionTest extends TestBase{
         app.getNavigationHelper().gotoMainPage();
 
 //      Получаем количество контактов
-        contactCountAfter = app.getGroupHelper().groupCount();
+        contactCountAfter = app.getContactHelper().getContactList();
 
 //      Проверяем количество контактов до и после
-        Assert.assertEquals(contactCountAfter, contactCountBefore - 1);
+        Assert.assertEquals(contactCountBefore.size(), contactCountAfter.size() + 1);
+
+        contactCountBefore.remove(contactCountBefore.size() -1);
+        Assert.assertEquals(contactCountBefore,contactCountAfter);
 
 //      выход из аккаунта
         app.getSessionHelper().logout();

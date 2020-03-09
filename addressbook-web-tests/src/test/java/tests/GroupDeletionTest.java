@@ -1,14 +1,15 @@
 package tests;
 
-import addressbook_tests_parametrs.ContactDataParametrs;
 import addressbook_tests_parametrs.GroupDataParametrs;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 public class GroupDeletionTest extends TestBase{
 
-    public int groupCountBefore;
-    public int groupCountAfter;
+    public List<GroupDataParametrs> groupCountBefore;
+    public List<GroupDataParametrs> groupCountAfter;
 
     @Test
     public void testGroupDeletion()  throws Exception {
@@ -21,10 +22,11 @@ public class GroupDeletionTest extends TestBase{
         }
 
 //      Получаем количество групп
-        groupCountBefore = app.getGroupHelper().groupCount();
+//      groupCountBefore = app.getGroupHelper().groupCount();
+        groupCountBefore = app.getGroupHelper().getGroupList();
 
 //      выбор группы
-        app.getGroupHelper().selectGroup(groupCountBefore - 1);
+        app.getGroupHelper().selectGroup(groupCountBefore.size() - 1);
 
 //      подтверждение удаления
         app.getGroupHelper().submitGroupDeletion();
@@ -33,10 +35,15 @@ public class GroupDeletionTest extends TestBase{
         app.getNavigationHelper().returnToGroupPage();
 
 //      Получаем количество групп
-        groupCountAfter = app.getGroupHelper().groupCount();
+//      groupCountAfter = app.getGroupHelper().groupCount();
+        groupCountAfter = app.getGroupHelper().getGroupList();
 
 //      Проверяем количество групп до и после
-        Assert.assertEquals(groupCountAfter, groupCountBefore - 1);
+//      Assert.assertEquals(groupCountAfter, groupCountBefore - 1);
+        Assert.assertEquals(groupCountAfter.size(),groupCountBefore.size() -1);
+
+        groupCountBefore.remove(groupCountBefore.size() - 1);
+        Assert.assertEquals(groupCountBefore, groupCountAfter);
 
 //      выход из аккаунта
         app.getSessionHelper().logout();

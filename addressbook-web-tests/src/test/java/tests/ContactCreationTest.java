@@ -1,18 +1,21 @@
 package tests;
 
 import addressbook_tests_parametrs.ContactDataParametrs;
+import addressbook_tests_parametrs.GroupDataParametrs;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 public class ContactCreationTest extends TestBase{
 
-    public int groupCountBefore;
-    public int groupCountAfter;
+    public List<ContactDataParametrs> contactCountBefore;
+    public List<ContactDataParametrs> contactCountAfter;
 
     @Test
     public void testContactCreation() throws Exception{
 //      Получаем количество контактов
-        groupCountBefore = app.getGroupHelper().groupCount();
+        contactCountBefore = app.getContactHelper().getContactList();
 
 //      добавляем контакт
         app.getContactHelper().initContactCreation();
@@ -27,10 +30,10 @@ public class ContactCreationTest extends TestBase{
         app.getNavigationHelper().gotoMainPage();
 
 //      Получаем количество групп
-        groupCountAfter = app.getGroupHelper().groupCount();
+        contactCountAfter = app.getContactHelper().getContactList();
 
 //      Проверяем количество контактов до и после
-        Assert.assertEquals(groupCountAfter, groupCountBefore + 1);
+        Assert.assertEquals(contactCountBefore.size(), contactCountAfter.size() - 1);
 
 //      выход из аккаунта
         app.getSessionHelper().logout();

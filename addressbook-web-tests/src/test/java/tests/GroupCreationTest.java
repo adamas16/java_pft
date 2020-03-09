@@ -5,6 +5,9 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.lang.reflect.Array;
+import java.util.List;
+
 
 public class GroupCreationTest extends TestBase{
     public int groupCountBefore;
@@ -16,7 +19,8 @@ public class GroupCreationTest extends TestBase{
         app.getNavigationHelper().gotoGroupPage();
 
 //      Получаем количество групп
-        groupCountBefore = app.getGroupHelper().groupCount();
+        List<GroupDataParametrs> groupCountBefore = app.getGroupHelper().getGroupList();
+//      groupCountBefore = app.getGroupHelper().groupCount();
 
 //      Нажатие на кнопку добавления группы
         app.getGroupHelper().initGroupCreation();
@@ -31,10 +35,11 @@ public class GroupCreationTest extends TestBase{
         app.getNavigationHelper().returnToGroupPage();
 
 //      Получаем количество групп
-        groupCountAfter = app.getGroupHelper().groupCount();
+        List<GroupDataParametrs> groupCountAfter = app.getGroupHelper().getGroupList();
+//      groupCountAfter = app.getGroupHelper().groupCount();
 
 //      Проверяем количество групп до и после
-        Assert.assertEquals(groupCountAfter,groupCountBefore + 1);
+        Assert.assertEquals(groupCountBefore.size(),groupCountAfter.size() - 1);
 
 //      выход из аккаунта
         app.getSessionHelper().logout();

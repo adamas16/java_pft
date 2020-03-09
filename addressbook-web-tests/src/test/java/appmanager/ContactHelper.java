@@ -1,11 +1,14 @@
 package appmanager;
 
 import addressbook_tests_parametrs.ContactDataParametrs;
-import addressbook_tests_parametrs.GroupDataParametrs;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends HelperBase{
 
@@ -78,4 +81,14 @@ public class ContactHelper extends HelperBase{
         return isElementPresent(By.xpath("//img[@title=\"Details\"]"));
     }
 
+    public List<ContactDataParametrs> getContactList() {
+        List <ContactDataParametrs> contacts = new ArrayList <ContactDataParametrs>();
+        List <WebElement> elements = driver.findElements(By.xpath("//img[@title=\"Details\"]"));
+        for (WebElement element: elements){
+            String name = element.getText();
+            ContactDataParametrs contact = new ContactDataParametrs(name, "Sergeevich_edit", "Romanov_edit", "arrnel_edit", "random title_edit", null, null, null, null, null, null);
+            contacts.add(contact);
+        }
+        return contacts;
+    }
 }

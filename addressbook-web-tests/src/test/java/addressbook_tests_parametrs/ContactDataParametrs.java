@@ -1,10 +1,13 @@
 package addressbook_tests_parametrs;
 
+import java.util.Objects;
+
 public class ContactDataParametrs{
     public final String name;
     public final String patronymic;
     public final String lastName;
     public final String nickName;
+
     public final String title;
     public final String country;
     public final String phone;
@@ -69,5 +72,29 @@ public class ContactDataParametrs{
 
     public String getbYear() {
         return bYear;
+    }
+
+    @Override
+    public String toString() {
+        return "ContactDataParametrs{" +
+                "name='" + name + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactDataParametrs that = (ContactDataParametrs) o;
+        return Objects.equals(name, that.name) &&
+                Objects.equals(patronymic, that.patronymic) &&
+                Objects.equals(lastName, that.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, patronymic, lastName);
     }
 }

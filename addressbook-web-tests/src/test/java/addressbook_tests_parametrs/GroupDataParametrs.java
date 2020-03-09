@@ -1,5 +1,7 @@
 package addressbook_tests_parametrs;
 
+import java.util.Objects;
+
 public class GroupDataParametrs {
     public final String name;
     public final String header;
@@ -21,5 +23,25 @@ public class GroupDataParametrs {
 
     public String getFooter() {
         return footer;
+    }
+
+    @Override
+    public String toString() {
+        return "GroupDataParametrs{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GroupDataParametrs that = (GroupDataParametrs) o;
+        return Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }
