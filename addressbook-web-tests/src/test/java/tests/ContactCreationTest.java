@@ -45,6 +45,7 @@ public class ContactCreationTest extends TestBase{
                 max = c.getId();
             }
         }
+        contact.setId(contactCountAfter.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
         contact.setId(max);
         Assert.assertEquals(new HashSet<Object>(contactCountBefore), new HashSet<Object>(contactCountAfter));
 

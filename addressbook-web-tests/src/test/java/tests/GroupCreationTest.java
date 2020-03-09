@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.lang.reflect.Array;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class GroupCreationTest extends TestBase{
 //      Нажатие на кнопку добавления группы
         app.getGroupHelper().initGroupCreation();
 
-        GroupDataParametrs group = new GroupDataParametrs("test1", "test2", "test3");
+        GroupDataParametrs group = new GroupDataParametrs("test2", "test2", "test3");
 //      заполнение формы
         app.getGroupHelper().fillGroupForm(group);
 
@@ -47,11 +48,12 @@ public class GroupCreationTest extends TestBase{
         groupCountBefore.add(group);
         int max = 0;
         for(GroupDataParametrs c : groupCountAfter){
-            if(c.getId()>max){
+            if(c.getId() > max){
                 max = c.getId();
             }
         }
-        group.setId(max);
+
+        group.setId(groupCountAfter.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
         Assert.assertEquals(new HashSet<Object>(groupCountBefore), new HashSet<Object>(groupCountAfter));
 
 //      выход из аккаунта
