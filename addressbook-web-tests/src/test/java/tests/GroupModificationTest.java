@@ -23,7 +23,7 @@ public class GroupModificationTest extends TestBase{
         groupCountBefore = app.getGroupHelper().groupCount();
 
 //      выбор группы
-        app.getGroupHelper().selectGroup();
+        app.getGroupHelper().selectGroup(groupCountBefore - 1);
 
 //      нажатие на кнопку изменить
         app.getGroupHelper().submitGroupEdition();

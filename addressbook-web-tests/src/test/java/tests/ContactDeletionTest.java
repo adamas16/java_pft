@@ -7,8 +7,8 @@ import org.testng.annotations.Test;
 
 public class ContactDeletionTest extends TestBase{
 
-    public int groupCountBefore;
-    public int groupCountAfter;
+    public int contactCountBefore;
+    public int contactCountAfter;
 
     @Test
     public void testContactDeletion() throws Exception {
@@ -24,10 +24,10 @@ public class ContactDeletionTest extends TestBase{
         }
 
 //      Получаем количество контактов
-        groupCountBefore = app.getGroupHelper().groupCount();
+        contactCountBefore = app.getGroupHelper().groupCount();
 
 //      выбор контакта
-        app.getContactHelper().selectContact();
+        app.getContactHelper().selectContact(contactCountBefore - 1);
 
 //      нажатие на кнопку удаления контакта
         app.getContactHelper().submitContactDeletion();
@@ -36,10 +36,10 @@ public class ContactDeletionTest extends TestBase{
         app.getNavigationHelper().gotoMainPage();
 
 //      Получаем количество контактов
-        groupCountAfter = app.getGroupHelper().groupCount();
+        contactCountAfter = app.getGroupHelper().groupCount();
 
 //      Проверяем количество контактов до и после
-        Assert.assertEquals(groupCountAfter, groupCountBefore - 1);
+        Assert.assertEquals(contactCountAfter, contactCountBefore - 1);
 
 //      выход из аккаунта
         app.getSessionHelper().logout();

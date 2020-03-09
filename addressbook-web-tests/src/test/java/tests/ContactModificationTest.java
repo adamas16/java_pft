@@ -7,8 +7,8 @@ import org.testng.annotations.Test;
 
 public class ContactModificationTest extends TestBase{
 
-    public int groupCountBefore;
-    public int groupCountAfter;
+    public int contactCountBefore;
+    public int contactCountAfter;
 
 
     @Test
@@ -21,10 +21,10 @@ public class ContactModificationTest extends TestBase{
             app.getContactHelper().createContact(new ContactDataParametrs("Dmitriy", "Sergeevich", "Romanov", "arrnel", "random title", "Russia", "+7(658)4853568", "random@mail.org", "4", "July", "1954"), true);
         }
 //      Получаем количество контактов
-        groupCountBefore = app.getGroupHelper().groupCount();
+        contactCountBefore = app.getGroupHelper().groupCount();
 
 //      нажатие на кнопку редактировать
-        app.getContactHelper().initContactEdition();
+        app.getContactHelper().initContactEdition(contactCountBefore - 1);
 
 //      заполнение формы
         app.getContactHelper().fillContactForm(new ContactDataParametrs("Dmitriy_edit", "Sergeevich_edit", "Romanov_edit", "arrnel_edit", "random title_edit", "Russia_edit", "+7(658)4853568", "random_edit@mail.org", "7", "June", "1989"),false);
@@ -36,10 +36,10 @@ public class ContactModificationTest extends TestBase{
         app.getNavigationHelper().gotoMainPage();
 
 //      Получаем количество групп
-        groupCountAfter = app.getGroupHelper().groupCount();
+        contactCountAfter = app.getGroupHelper().groupCount();
 
 //      Проверяем количество контактов до и после
-        Assert.assertEquals(groupCountAfter, groupCountBefore);
+        Assert.assertEquals(contactCountAfter, contactCountBefore);
 
 
 //      выход из аккаунта

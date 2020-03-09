@@ -24,7 +24,7 @@ public class GroupDeletionTest extends TestBase{
         groupCountBefore = app.getGroupHelper().groupCount();
 
 //      выбор группы
-        app.getGroupHelper().selectGroup();
+        app.getGroupHelper().selectGroup(groupCountBefore - 1);
 
 //      подтверждение удаления
         app.getGroupHelper().submitGroupDeletion();
