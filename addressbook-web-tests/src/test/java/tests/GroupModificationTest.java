@@ -33,7 +33,7 @@ public class GroupModificationTest extends TestBase{
         app.getGroupHelper().submitGroupEdition();
 
 //
-        GroupDataParametrs group = new GroupDataParametrs("test1", "test2", "test3");
+        GroupDataParametrs group = new GroupDataParametrs(groupCountBefore.get(groupCountBefore.size()-1).getId(),"test1", "test2", "test3");
 
 //      заполнение формы
         app.getGroupHelper().fillGroupForm(group);

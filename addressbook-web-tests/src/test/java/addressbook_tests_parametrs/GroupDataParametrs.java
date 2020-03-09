@@ -3,14 +3,32 @@ package addressbook_tests_parametrs;
 import java.util.Objects;
 
 public class GroupDataParametrs {
+
+    public int id;
     public final String name;
     public final String header;
     public final String footer;
 
     public GroupDataParametrs(String name, String header, String footer) {
+        this.id = 0;
         this.name = name;
         this.header = header;
         this.footer = footer;
+    }
+
+    public GroupDataParametrs(int id,String name, String header, String footer) {
+        this.id = id;
+        this.name = name;
+        this.header = header;
+        this.footer = footer;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id){
+        this.id = id;
     }
 
     public String getName() {
@@ -28,7 +46,8 @@ public class GroupDataParametrs {
     @Override
     public String toString() {
         return "GroupDataParametrs{" +
-                "name='" + name + '\'' +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 
@@ -37,11 +56,13 @@ public class GroupDataParametrs {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GroupDataParametrs that = (GroupDataParametrs) o;
-        return Objects.equals(name, that.name);
+        return id == that.id &&
+                Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(id, name);
     }
+
 }
