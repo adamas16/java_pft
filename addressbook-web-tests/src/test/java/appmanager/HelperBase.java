@@ -72,4 +72,7 @@ public class HelperBase {
         driver.navigate().refresh();
     }
 
+    protected int getElementsCount(By locator) {
+        return driver.findElements(locator).size();
+    }
 }

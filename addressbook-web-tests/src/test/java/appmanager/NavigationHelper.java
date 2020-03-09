@@ -10,7 +10,7 @@ public class NavigationHelper extends HelperBase{
     }
 
     public void gotoGroupPage(){
-        if (isElementPresent(By.tagName("h1"))
+        if (!isElementPresent(By.tagName("h1"))
                 && driver.findElement(By.tagName("h1")).getText().equals("Groups")
                 && isElementPresent(By.name("new"))){
             return;
@@ -19,7 +19,7 @@ public class NavigationHelper extends HelperBase{
     }
 
     public void returnToGroupPage() {
-        if (isElementPresent(By.xpath("//div[text()=\"A new group has been entered into the address book.\"]"))){
+        if (!isElementPresent(By.xpath("//div[text()=\"A new group has been entered into the address book.\" or text()=\"Group record has been updated.\" or text()=\"Group has been removed.\"]"))){
             return;
         }
         click(By.linkText("group page"));

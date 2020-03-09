@@ -2,9 +2,14 @@ package tests;
 
 import addressbook_tests_parametrs.ContactDataParametrs;
 import addressbook_tests_parametrs.GroupDataParametrs;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class ContactModificationTest extends TestBase{
+
+    public int groupCountBefore;
+    public int groupCountAfter;
+
 
     @Test
     public void testContactModification() throws InterruptedException {
@@ -15,14 +20,28 @@ public class ContactModificationTest extends TestBase{
 //      создание контакта при его отсутствии
             app.getContactHelper().createContact(new ContactDataParametrs("Dmitriy", "Sergeevich", "Romanov", "arrnel", "random title", "Russia", "+7(658)4853568", "random@mail.org", "4", "July", "1954"), true);
         }
+//      Получаем количество контактов
+        groupCountBefore = app.getGroupHelper().groupCount();
+
 //      нажатие на кнопку редактировать
         app.getContactHelper().initContactEdition();
+
 //      заполнение формы
         app.getContactHelper().fillContactForm(new ContactDataParametrs("Dmitriy_edit", "Sergeevich_edit", "Romanov_edit", "arrnel_edit", "random title_edit", "Russia_edit", "+7(658)4853568", "random_edit@mail.org", "7", "June", "1989"),false);
+
 //      нажать на обновить контакт
         app.getContactHelper().updateButton();
+
 //      возврат на главную страницу
         app.getNavigationHelper().gotoMainPage();
+
+//      Получаем количество групп
+        groupCountAfter = app.getGroupHelper().groupCount();
+
+//      Проверяем количество контактов до и после
+        Assert.assertEquals(groupCountAfter, groupCountBefore);
+
+
 //      выход из аккаунта
         app.getSessionHelper().logout();
     }

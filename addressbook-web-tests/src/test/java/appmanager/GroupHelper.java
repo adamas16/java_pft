@@ -58,4 +58,9 @@ public class GroupHelper extends HelperBase {
         }
         contactHelper.gotoHomePage();
     }
+
+    public int groupCount() {
+        return getElementsCount(By.xpath("//input[@name=\"selected[]\"]"));
+    }
+
 }
