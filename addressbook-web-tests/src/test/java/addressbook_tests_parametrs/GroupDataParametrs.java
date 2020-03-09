@@ -10,7 +10,7 @@ public class GroupDataParametrs {
     public final String footer;
 
     public GroupDataParametrs(String name, String header, String footer) {
-        this.id = 0;
+        this.id = Integer.MAX_VALUE;
         this.name = name;
         this.header = header;
         this.footer = footer;
@@ -56,13 +56,12 @@ public class GroupDataParametrs {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GroupDataParametrs that = (GroupDataParametrs) o;
-        return id == that.id &&
-                Objects.equals(name, that.name);
+        return Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(name);
     }
 
 }

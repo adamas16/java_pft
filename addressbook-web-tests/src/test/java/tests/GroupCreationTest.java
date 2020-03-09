@@ -56,6 +56,11 @@ public class GroupCreationTest extends TestBase{
         group.setId(groupCountAfter.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
         Assert.assertEquals(new HashSet<Object>(groupCountBefore), new HashSet<Object>(groupCountAfter));
 
+        Comparator <? super GroupDataParametrs> byId = (g1,g2) -> Integer.compare(g1.getId(),g2.getId());
+        groupCountBefore.sort(byId);
+        groupCountAfter.sort(byId);
+        Assert.assertEquals(groupCountBefore, groupCountAfter);
+
 //      выход из аккаунта
         app.getSessionHelper().logout();
     }

@@ -1,16 +1,18 @@
 package tests;
 
+import addressbook_tests_parametrs.ContactDataParametrs;
 import addressbook_tests_parametrs.GroupDataParametrs;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
 public class GroupModificationTest extends TestBase{
 
-    public int groupCountBefore;
-    public int groupCountAfter;
+    public List<GroupDataParametrs> groupCountBefore;
+    public List<GroupDataParametrs> groupCountAfter;
 
     @Test
     public void testGroupModification() throws Exception{
@@ -24,7 +26,7 @@ public class GroupModificationTest extends TestBase{
 
 //      Получаем количество групп
 //      groupCountBefore = app.getGroupHelper().groupCount();
-        List<GroupDataParametrs> groupCountBefore = app.getGroupHelper().getGroupList();
+        groupCountBefore = app.getGroupHelper().getGroupList();
 
 //      выбор группы
         app.getGroupHelper().selectGroup(groupCountBefore.size() - 1);
@@ -46,14 +48,18 @@ public class GroupModificationTest extends TestBase{
 
 //      Получаем количество групп
 //      groupCountAfter = app.getGroupHelper().groupCount();
-        List<GroupDataParametrs> groupCountAfter = app.getGroupHelper().getGroupList();
+        groupCountAfter = app.getGroupHelper().getGroupList();
 
 //      Проверяем количество групп до и после
         Assert.assertEquals(groupCountAfter.size(), groupCountBefore.size());
 
         groupCountBefore.remove(groupCountBefore.size() -1);
         groupCountBefore.add(group);
-        Assert.assertEquals(new HashSet<Object>(groupCountBefore), new HashSet<Object>(groupCountAfter));
+
+        Comparator <? super GroupDataParametrs> byId = (g1,g2) -> Integer.compare(g1.getId(),g2.getId());
+        groupCountBefore.sort(byId);
+        groupCountAfter.sort(byId);
+        Assert.assertEquals(groupCountBefore, groupCountAfter);
 
 //      выход из аккаунта
         app.getSessionHelper().logout();

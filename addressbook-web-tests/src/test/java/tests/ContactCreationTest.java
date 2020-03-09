@@ -5,6 +5,7 @@ import addressbook_tests_parametrs.GroupDataParametrs;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
@@ -48,6 +49,11 @@ public class ContactCreationTest extends TestBase{
         contact.setId(contactCountAfter.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
         contact.setId(max);
         Assert.assertEquals(new HashSet<Object>(contactCountBefore), new HashSet<Object>(contactCountAfter));
+
+        Comparator<? super ContactDataParametrs> byId = (g1, g2) -> Integer.compare(g1.getId(),g2.getId());
+        contactCountBefore.sort(byId);
+        contactCountAfter.sort(byId);
+        Assert.assertEquals(contactCountBefore, contactCountAfter);
 
 //      выход из аккаунта
         app.getSessionHelper().logout();
