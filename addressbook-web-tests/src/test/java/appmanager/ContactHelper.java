@@ -17,6 +17,8 @@ public class ContactHelper extends HelperBase{
         super(driver);
     }
 
+    private NavigationHelper navigationHelper = new NavigationHelper(driver);
+
     public void submitContactDeletion(){
         click(By.xpath("//input[@value=\"Delete\"]"));
         isAlertPresent();
@@ -96,5 +98,18 @@ public class ContactHelper extends HelperBase{
             contacts.add(contact);
         }
         return contacts;
+    }
+
+    public void modifyContact(int index, ContactDataParametrs contact) {
+//      нажатие на кнопку редактировать
+        initContactEdition(index);
+
+//      заполнение формы
+        fillContactForm(contact,false);
+
+//      нажать на обновить контактupdateButton();
+
+//      возврат на главную страницу
+        navigationHelper.gotoMainPage();
     }
 }

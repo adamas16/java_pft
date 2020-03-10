@@ -3,6 +3,7 @@ package tests;
 import addressbook_tests_parametrs.ContactDataParametrs;
 import addressbook_tests_parametrs.GroupDataParametrs;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Comparator;
@@ -14,46 +15,35 @@ public class GroupModificationTest extends TestBase{
     public List<GroupDataParametrs> groupCountBefore;
     public List<GroupDataParametrs> groupCountAfter;
 
+    @BeforeMethod
+    public void ensurePreconditions() {
+        //      проверка наличия группы
+        if(!app.getGroupHelper().isThereAGroup()){
+            app.getGroupHelper().createGroup(new GroupDataParametrs("test1", "test2", "test3"));
+        }
+    }
+
     @Test
     public void testGroupModification(){
 //      переход на страницу с группами
         app.getNavigationHelper().gotoGroupPage();
 
-//      проверка наличия группы
-        if(!app.getGroupHelper().isThereAGroup()){
-            app.getGroupHelper().createGroup(new GroupDataParametrs("test1", "test2", "test3"));
-        }
-
 //      Получаем количество групп
-//      groupCountBefore = app.getGroupHelper().groupCount();
         groupCountBefore = app.getGroupHelper().getGroupList();
 
-//      выбор группы
-        app.getGroupHelper().selectGroup(groupCountBefore.size() - 1);
+//      индекс группы
+        int index = groupCountBefore.size() - 1;
+        GroupDataParametrs group = new GroupDataParametrs(groupCountBefore.get(index).getId(),"test1", "test2", "test3");
 
-//      нажатие на кнопку изменить
-        app.getGroupHelper().submitGroupEdition();
-
-//
-        GroupDataParametrs group = new GroupDataParametrs(groupCountBefore.get(groupCountBefore.size()-1).getId(),"test1", "test2", "test3");
-
-//      заполнение формы
-        app.getGroupHelper().fillGroupForm(group);
-
-//      подтверждение изменения
-        app.getContactHelper().updateButton();
-
-//      возврат на страницу с группами
-        app.getNavigationHelper().returnToGroupPage();
+        app.getGroupHelper().modifyGroup(index, group);
 
 //      Получаем количество групп
-//      groupCountAfter = app.getGroupHelper().groupCount();
         groupCountAfter = app.getGroupHelper().getGroupList();
 
 //      Проверяем количество групп до и после
         Assert.assertEquals(groupCountAfter.size(), groupCountBefore.size());
 
-        groupCountBefore.remove(groupCountBefore.size() -1);
+        groupCountBefore.remove(index);
         groupCountBefore.add(group);
 
         Comparator <? super GroupDataParametrs> byId = (g1,g2) -> Integer.compare(g1.getId(),g2.getId());

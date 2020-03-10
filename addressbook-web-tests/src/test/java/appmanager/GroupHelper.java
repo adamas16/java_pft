@@ -78,4 +78,21 @@ public class GroupHelper extends HelperBase {
         }
         return groups;
     }
+    public void modifyGroup(int index, GroupDataParametrs group) {
+
+//      выбор группы
+        selectGroup(index);
+
+//      нажатие на кнопку изменить
+        submitGroupEdition();
+
+//      заполнение формы
+        fillGroupForm(group);
+
+//      подтверждение изменения
+        contactHelper.updateButton();
+
+//      возврат на страницу с группами
+        navigationHelper.returnToGroupPage();
+    }
 }
