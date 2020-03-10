@@ -12,7 +12,7 @@ public class ContactDeletionTest extends TestBase{
     public List<ContactDataParametrs> contactCountBefore;
     public List<ContactDataParametrs> contactCountAfter;
     @Test
-    public void testContactDeletion() throws Exception {
+    public void testContactDeletion(){
 //        проверка наличия контакта
         if(!app.getContactHelper().isThereAContact()){
 
@@ -44,9 +44,6 @@ public class ContactDeletionTest extends TestBase{
 
         contactCountBefore.remove(contactCountBefore.size() -1);
         Assert.assertEquals(contactCountBefore,contactCountAfter);
-
-//      выход из аккаунта
-        app.getSessionHelper().logout();
     }
 
 }

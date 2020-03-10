@@ -6,7 +6,7 @@ repositories {
 
 dependencies {
     implementation 'org.testng:testng:7.0.0'
-    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+    compile 'org.seleniumhq.selenium:selenium-java:4.0.0-alpha-3'
     compile group: 'io.qameta.allure', name: 'allure-junit4', version: '2.13.2'
 }
 

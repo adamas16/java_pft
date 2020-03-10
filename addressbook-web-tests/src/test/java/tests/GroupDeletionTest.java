@@ -12,7 +12,7 @@ public class GroupDeletionTest extends TestBase{
     public List<GroupDataParametrs> groupCountAfter;
 
     @Test
-    public void testGroupDeletion()  throws Exception {
+    public void testGroupDeletion(){
 //      переход на страницу с группами
         app.getNavigationHelper().gotoGroupPage();
 
@@ -45,8 +45,6 @@ public class GroupDeletionTest extends TestBase{
         groupCountBefore.remove(groupCountBefore.size() - 1);
         Assert.assertEquals(groupCountBefore, groupCountAfter);
 
-//      выход из аккаунта
-        app.getSessionHelper().logout();
     }
 
 }

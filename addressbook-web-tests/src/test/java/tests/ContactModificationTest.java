@@ -15,7 +15,7 @@ public class ContactModificationTest extends TestBase{
 
 
     @Test
-    public void testContactModification() throws InterruptedException {
+    public void testContactModification(){
 //      проверка наличия контакта
         if(!app.getContactHelper().isThereAContact()){
 //      создание группы при её отсутствии
@@ -51,9 +51,6 @@ public class ContactModificationTest extends TestBase{
         contactCountBefore.remove(contactCountBefore.size() -1);
         contactCountBefore.add(contact);
         Assert.assertEquals(new HashSet<Object>(contactCountBefore), new HashSet<Object>(contactCountAfter));
-
-//      выход из аккаунта
-        app.getSessionHelper().logout();
     }
 
 }

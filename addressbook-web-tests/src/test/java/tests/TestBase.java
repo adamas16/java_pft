@@ -1,21 +1,24 @@
 package tests;
 
-import org.openqa.selenium.remote.BrowserType;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import appmanager.ApplicationManager;
+import org.openqa.selenium.remote.BrowserType;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 
 public class TestBase{
 
-    public final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
+    public static final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
 
-    @BeforeMethod(alwaysRun = true)
-    public void setUp() throws Exception {
+    @BeforeSuite
+    public void setUp() throws Exception{
         app.init();
     }
 
-    @AfterMethod(alwaysRun = true)
-    public void tearDown() throws Exception {
+    @AfterSuite
+    public void tearDown(){
+        //      выход из аккаунта
+        app.getSessionHelper().logout();
+
         app.stop();
     }
 }

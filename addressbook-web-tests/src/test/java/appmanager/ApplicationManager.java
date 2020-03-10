@@ -25,6 +25,7 @@ public class ApplicationManager{
 
 
     public void init() {
+        
         String browser = BrowserType.GOOGLECHROME;
         if (browser.equals(BrowserType.GOOGLECHROME)){
             driver = new ChromeDriver();

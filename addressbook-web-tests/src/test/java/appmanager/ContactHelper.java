@@ -66,7 +66,7 @@ public class ContactHelper extends HelperBase{
         click(By.xpath("//input[@name=\"update\"]"));
     }
 
-    public void createContact(ContactDataParametrs contactDataParametrs, boolean creation) throws InterruptedException {
+    public void createContact(ContactDataParametrs contactDataParametrs, boolean creation) {
         initContactCreation();
         fillContactForm(contactDataParametrs,creation);
         submitContactCreation();

@@ -15,7 +15,7 @@ public class GroupModificationTest extends TestBase{
     public List<GroupDataParametrs> groupCountAfter;
 
     @Test
-    public void testGroupModification() throws Exception{
+    public void testGroupModification(){
 //      переход на страницу с группами
         app.getNavigationHelper().gotoGroupPage();
 
@@ -60,9 +60,6 @@ public class GroupModificationTest extends TestBase{
         groupCountBefore.sort(byId);
         groupCountAfter.sort(byId);
         Assert.assertEquals(groupCountBefore, groupCountAfter);
-
-//      выход из аккаунта
-        app.getSessionHelper().logout();
     }
 
 }

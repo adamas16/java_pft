@@ -17,7 +17,7 @@ public class GroupCreationTest extends TestBase{
     public List<GroupDataParametrs> groupCountAfter;
 
     @Test
-    public void testGroupCreationTests()throws InterruptedException{
+    public void testGroupCreationTests(){
 //      Переход на страницу групп
         app.getNavigationHelper().gotoGroupPage();
 
@@ -60,9 +60,6 @@ public class GroupCreationTest extends TestBase{
         groupCountBefore.sort(byId);
         groupCountAfter.sort(byId);
         Assert.assertEquals(groupCountBefore, groupCountAfter);
-
-//      выход из аккаунта
-        app.getSessionHelper().logout();
-    }
+}
 
 }

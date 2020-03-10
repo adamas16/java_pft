@@ -15,7 +15,7 @@ public class ContactCreationTest extends TestBase{
     public List<ContactDataParametrs> contactCountAfter;
 
     @Test
-    public void testContactCreation() throws Exception{
+    public void testContactCreation(){
 //      Получаем количество контактов
         contactCountBefore = app.getContactHelper().getContactList();
 
@@ -54,9 +54,6 @@ public class ContactCreationTest extends TestBase{
         contactCountBefore.sort(byId);
         contactCountAfter.sort(byId);
         Assert.assertEquals(contactCountBefore, contactCountAfter);
-
-//      выход из аккаунта
-        app.getSessionHelper().logout();
     }
 
 
