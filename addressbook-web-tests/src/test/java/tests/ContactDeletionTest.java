@@ -3,44 +3,40 @@ package tests;
 import addressbook_tests_parametrs.ContactDataParametrs;
 import addressbook_tests_parametrs.GroupDataParametrs;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.List;
+import java.util.Set;
 
-public class ContactDeletionTest extends TestBase{
+public class ContactDeletionTest extends TestBase {
 
-    public List<ContactDataParametrs> before;
-    public List<ContactDataParametrs> after;
-    @Test
-    public void testContactDeletion(){
-//        проверка наличия контакта
-        if(app.contact().list().size() == 0){
+    public Set<ContactDataParametrs> before;
+    public Set<ContactDataParametrs> after;
 
-//          создание группы при её отсутствии
+    @BeforeMethod
+    public void ensurePreconditions() {
+
+        if (app.contact().list().size() == 0) {
+
             app.group().exists(new GroupDataParametrs().withName("test1").withHeader("test2").withFooter("test3"));
 
-//          создание контакта при его отсутствии
-            app.contact().create(new ContactDataParametrs().withName("Dmitriy").withLastName("Romanov").withNickName( "arrnel").withCountry("Russia").withPhone("+7(658)4853568"), true);
-            System.out.println("Контакт создан");
+            app.contact().create(new ContactDataParametrs().withName("Dmitriy").withLastName("Romanov").withNickName("arrnel").withCountry("Russia").withPhone("+7(658)4853568"), true);
         }
-
-//      Получаем количество контактов
-        before = app.contact().list();
-
-        int index = before.size() - 1;
-
-        app.contact().delete(index);
-
-//      Получаем количество контактов
-        after = app.contact().list();
-
-//      Проверяем количество контактов до и после
-        Assert.assertEquals(before.size(), after.size() + 1);
-
-        before.remove(index);
-        Assert.assertEquals(before,after);
     }
 
+    @Test
+    public void testContactDeletion() throws Exception{
+        before = app.contact().all();
 
+        Set<ContactDataParametrs> before = app.contact().all();
+        ContactDataParametrs deletedContact = before.iterator().next();
+        app.contact().delete(deletedContact);
+        Set<ContactDataParametrs> after = app.contact().all();
+        Assert.assertEquals(after.size(),before.size()-1);
+        before.remove(deletedContact);
+        Assert.assertEquals(before, after);
+
+
+    }
 
 }

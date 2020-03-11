@@ -68,6 +68,11 @@ public class HelperBase {
             return false;
         }
     }
+
+    public void alertAccept() {
+        driver.switchTo().alert().accept();
+    }
+
     public void refresh(){
         driver.navigate().refresh();
     }

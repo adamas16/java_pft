@@ -9,16 +9,17 @@ import org.testng.annotations.Test;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-public class ContactModificationTest extends TestBase{
+public class ContactModificationTest extends TestBase {
 
-    public List<ContactDataParametrs> before;
-    public List<ContactDataParametrs> after;
+    public Set<ContactDataParametrs> before;
+    public Set<ContactDataParametrs> after;
 
     @BeforeMethod
     public void ensurePreconditions() {
 //      проверка наличия контакта
-        if(app.contact().list().size() == 0){
+        if (app.contact().list().size() == 0) {
 //      создание группы при её отсутствии
             app.group().exists(new GroupDataParametrs().withName("test1").withHeader("test2").withFooter("test3"));
 //      создание контакта при его отсутствии
@@ -27,33 +28,25 @@ public class ContactModificationTest extends TestBase{
     }
 
     @Test
-    public void testContactModification(){
-//      Получаем количество контактов
-        before = app.contact().list();
+    public void testContactModification() {
 
-//      Индекс контакта
-        int index = before.size() - 1;
+        before = app.contact().all();
 
-        ContactDataParametrs contact = new ContactDataParametrs().withId(before.get(index).getId()).withName("Dmitriy").withLastName("Romanov").withNickName( "arrnel").withCountry("Russia").withPhone("+7(658)4853568");
+        ContactDataParametrs modifiedContact = before.iterator().next();
 
-//      Модифицируем контакт
-        app.contact().modify(index, contact);
+        ContactDataParametrs contact = new ContactDataParametrs().withId(modifiedContact.getId()).withName("Dmitriy").withLastName("Romanov").withNickName("arrnel").withCountry("Russia").withPhone("+7(658)4853568");
 
-//      Получаем количество контактов
-        after = app.contact().list();
 
-//      Сравнение
+        app.contact().modify(contact);
+
+
+        after = app.contact().all();
+
         Assert.assertEquals(after.size(), before.size());
 
-
-        before.remove(index);
+        before.remove(modifiedContact);
         before.add(contact);
 
-//      2 потока. Сортировка и сравнение
-        Comparator<? super ContactDataParametrs> byId=(g1, g2)-> Integer.compare(g1.getId(),g2.getId());
-        before.sort(byId);
-        after.sort(byId);
-        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+        Assert.assertEquals(before, after);
     }
-
 }

@@ -5,6 +5,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import java.util.Set;
+import java.util.HashSet;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +39,12 @@ public class ContactHelper extends HelperBase{
     }
 
 
-    public void selectContact(int index){
-        driver.findElements(By.xpath("//input[@name=\"selected[]\"]")).get(index).click();
+    public void selectContactsById(int id)  {
+        driver.findElement(By.cssSelector("input[value='"+id+"'")).click();
+    }
+
+    public void selectContactModification(int id) {
+        driver.findElement(By.xpath("//a[@href=\"edit.php?id="+id+"\"]")).click();
     }
 
     public void initContactEdition(int index){
@@ -99,28 +106,29 @@ public class ContactHelper extends HelperBase{
 //        return contacts;
     }
 
-    public void modify(int index, ContactDataParametrs contact) {
+    public void modify(ContactDataParametrs contact) {
 //      нажатие на кнопку редактировать
-        initContactEdition(index);
+        selectContactsById(contact.getId());
+
+        selectContactModification(contact.getId());
 
 //      заполнение формы
         fillContactForm(contact,false);
 
-//      нажать на обновить контактupdateButton();
+//      нажать на обновить контакт
+        updateButton();
 
 //      возврат на главную страницу
         goTo.mainPage();
     }
 
-    public void delete(int index) {
-//      выбор контакта
-        selectContact(index);
-
-//      нажатие на кнопку удаления контакта
+    public void delete(ContactDataParametrs contact) throws Exception{
+        selectContactsById(contact.getId());
         submitContactDeletion();
-
-//      возврат на главную страницу
-        goTo.mainPage();
+        isAlertPresent();
+//        goTo.mainPage();
+//        Thread.sleep( 10000);
+//        driver.navigate().refresh();
     }
 
     public void createContact(ContactDataParametrs contact) {
@@ -135,8 +143,19 @@ public class ContactHelper extends HelperBase{
 
 //      возврат на главную страницу
         goTo.mainPage();
+    }
 
-
+    public Set<ContactDataParametrs> all() {
+        Set<ContactDataParametrs> contacts = new HashSet<ContactDataParametrs>();
+        List<WebElement> elements = driver.findElements(By.name("entry"));
+        for (WebElement element : elements) {
+            List<WebElement> cells = element.findElements(By.xpath("td"));
+            String lastname = cells.get(1).getText();
+            String name = cells.get(2).getText();
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            contacts.add(new ContactDataParametrs().withId(id).withName(name).withLastName(lastname));
+        }
+        return contacts;
     }
 
 }
