@@ -24,19 +24,10 @@ public class ContactHelper extends HelperBase{
 
     public void fillContactForm(ContactDataParametrs contactDataParametrs, boolean creation) {
         type(By.name("firstname"), contactDataParametrs.getName());
-        type(By.name("middlename"),contactDataParametrs.getPatronymic());
         type(By.name("lastname"), contactDataParametrs.getLastName());
         type(By.name("nickname"), contactDataParametrs.getNickName());
-
-        type(By.name("title"), contactDataParametrs.getTitle());
         type(By.name("address"), contactDataParametrs.getCountry());
         type(By.name("mobile"), contactDataParametrs.getPhone());
-
-        type(By.name("email"), contactDataParametrs.getMail());
-
-        selectByVisibilityTextMethod(By.name("bday"), contactDataParametrs.getbDay());
-        selectByVisibilityTextMethod(By.name("bmonth"), contactDataParametrs.getbMonth());
-        type(By.name("byear"), contactDataParametrs.getbYear());
         if (creation){
             selectByVisibilityTextMethod(By.name("new_group"),"test1");
         } else {
@@ -83,19 +74,29 @@ public class ContactHelper extends HelperBase{
     }
 
     public List<ContactDataParametrs> list() {
-        List<ContactDataParametrs> contacts = new ArrayList<ContactDataParametrs>();
-        List<WebElement> elements = driver.findElements(By.name("entry"));
+        List<ContactDataParametrs> contacts= new ArrayList<ContactDataParametrs>();
+        List<WebElement> elements= driver.findElements(By.name("entry"));
         for (WebElement element : elements) {
-            List<WebElement> contactEntryList = element.findElements(By.cssSelector("td"));
-            WebElement nameCell = contactEntryList.get(2);
-            String name = nameCell.getText();
-            WebElement lastnameCell = contactEntryList.get(1);
-            String lastname = lastnameCell.getText();
-            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
-            ContactDataParametrs contact = new ContactDataParametrs(name, "Sergeevich", lastname,null, null, null, null, null,null, null, null);
-            contacts.add(contact);
+            List<WebElement> cells= element.findElements(By.xpath("td"));
+            String lastname =cells.get(1).getText();
+            String name =cells.get(2).getText();
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            contacts.add(new ContactDataParametrs().withId(id).withName(name).withLastName(lastname));
         }
         return contacts;
+//        List<ContactDataParametrs> contacts = new ArrayList<ContactDataParametrs>();
+//        List<WebElement> elements = driver.findElements(By.name("entry"));
+//        for (WebElement element : elements) {
+//            List<WebElement> contactEntryList = element.findElements(By.cssSelector("td"));
+//            WebElement nameCell = contactEntryList.get(2);
+//            String name = nameCell.getText();
+//            WebElement lastnameCell = contactEntryList.get(1);
+//            String lastname = lastnameCell.getText();
+//            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
+//            ContactDataParametrs contact = new ContactDataParametrs(name, "Sergeevich", lastname,null, null, null, null, null,null, null, null);
+//            contacts.add(contact);
+//        }
+//        return contacts;
     }
 
     public void modify(int index, ContactDataParametrs contact) {
@@ -108,7 +109,7 @@ public class ContactHelper extends HelperBase{
 //      нажать на обновить контактupdateButton();
 
 //      возврат на главную страницу
-        goTo.gotoMainPage();
+        goTo.mainPage();
     }
 
     public void delete(int index) {
@@ -119,7 +120,7 @@ public class ContactHelper extends HelperBase{
         submitContactDeletion();
 
 //      возврат на главную страницу
-        goTo.gotoMainPage();
+        goTo.mainPage();
     }
 
     public void createContact(ContactDataParametrs contact) {
@@ -133,7 +134,7 @@ public class ContactHelper extends HelperBase{
         submitContactCreation();
 
 //      возврат на главную страницу
-        goTo.gotoMainPage();
+        goTo.mainPage();
 
 
     }

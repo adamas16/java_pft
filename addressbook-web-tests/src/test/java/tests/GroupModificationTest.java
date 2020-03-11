@@ -17,21 +17,22 @@ public class GroupModificationTest extends TestBase{
     public void ensurePreconditions() {
 //      проверка наличия группы
         if(!app.group().isThereAGroup()){
-            app.group().create(new GroupDataParametrs("test1", "test2", "test3"));
+            app.group().create(new GroupDataParametrs().withName("test1"));
         }
     }
 
     @Test
     public void testGroupModification(){
 //      переход на страницу с группами
-        app.goTo().gotoGroupPage();
+        app.goTo().groupPage();
 
 //      Получаем количество групп
         before = app.group().list();
 
 //      индекс группы
         int index = before.size() - 1;
-        GroupDataParametrs group = new GroupDataParametrs(before.get(index).getId(),"test1", "test2", "test3");
+        GroupDataParametrs group = new GroupDataParametrs()
+                .withId(before.get(index).getId()).withName("test1").withHeader("test2").withFooter("test3");
 
         app.group().modifyGroup(index, group);
 

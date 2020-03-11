@@ -7,42 +7,63 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class GroupDeletionTest extends TestBase{
+public class GroupDeletionTest extends TestBase {
 
     public List<GroupDataParametrs> before;
     public List<GroupDataParametrs> after;
 
     @BeforeMethod
     public void ensurePreconditions() {
-//      проверка наличия группы
-        if(app.group().list().size() == 0){
-            app.group().create(new GroupDataParametrs("test1", "test2", "test3"));
+        app.goTo().groupPage();
+        //если не сущ ни одной группы, то создать новую
+        if (app.group().list().size() == 0) {
+            app.group().create(new GroupDataParametrs().withName("test1"));
         }
     }
 
     @Test
-    public void testGroupDeletion(){
-//      переход на страницу с группами
-        app.goTo().gotoGroupPage();
-
-        int index = before.size() - 1;
-
-//      Получаем количество групп
-//      groupCountBefore = app.getGroupHelper().groupCount();
+    public void testGroupDeletion() throws Exception {
         before = app.group().list();
+        int index = before.size() - 1;
         app.group().delete(index);
-
-//      Получаем количество групп
-//      groupCountAfter = app.getGroupHelper().groupCount();
         after = app.group().list();
-
-//      Проверяем количество групп до и после
-//      Assert.assertEquals(groupCountAfter, groupCountBefore - 1);
-        Assert.assertEquals(before.size(), after.size() + 1);
+        Assert.assertEquals(after.size(), before.size() - 1);
 
         before.remove(index);
+
         Assert.assertEquals(before, after);
 
     }
-
 }
+
+//    @BeforeMethod
+//    public void ensurePreconditions() {
+////      проверка наличия группы
+//        if(app.group().list().size() == 0){
+//            app.group().create(new GroupDataParametrs().withName("test1"));
+//        }
+//    }
+//
+//    @Test
+//    public void testGroupDeletion() {
+//        app.goTo().groupPage();
+//
+////      переход на страницу с группами
+//        before = app.group().list();
+//        int index = before.size() - 1;
+//
+////      Получаем количество групп
+//        app.group().delete(index);
+//
+////      Получаем количество групп
+//        after = app.group().list();
+//
+////      Проверяем количество групп до и после
+//        Assert.assertEquals(before.size(), after.size() + 1);
+//
+//        before.remove(index);
+//        Assert.assertEquals(before, after);
+//
+//    }
+//
+//}

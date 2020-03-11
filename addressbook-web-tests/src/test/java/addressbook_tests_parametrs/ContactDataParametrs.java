@@ -4,59 +4,18 @@ import java.util.Objects;
 
 public class ContactDataParametrs{
     public int id;
-    public final String name;
-    public final String patronymic;
-    public final String lastName;
-    public final String nickName;
+    public String name;
+    public String lastName;
+    public String nickName;
+    public String country;
+    public String phone;
 
-    public final String title;
-    public final String country;
-    public final String phone;
-    public final String mail;
-    public final String bDay;
-    public final String bMonth;
-    public final String bYear;
-
-    public ContactDataParametrs(int id, String name, String patronymic, String lastName, String nickName, String title, String country, String phone, String mail, String bDay, String bMonth, String bYear) {
-        this.id = id;
-        this.name = name;
-        this.patronymic = patronymic;
-        this.lastName = lastName;
-        this.nickName = nickName;
-        this.title = title;
-        this.country = country;
-        this.phone = phone;
-        this.mail = mail;
-        this.bDay = bDay;
-        this.bMonth = bMonth;
-        this.bYear = bYear;
-    }
-
-    public ContactDataParametrs(String name, String patronymic, String lastName, String nickName, String title, String country, String phone, String mail, String bDay, String bMonth, String bYear) {
-        this.id = 0;
-        this.name = name;
-        this.patronymic = patronymic;
-        this.lastName = lastName;
-        this.nickName = nickName;
-        this.title = title;
-        this.country = country;
-        this.phone = phone;
-        this.mail = mail;
-        this.bDay = bDay;
-        this.bMonth = bMonth;
-        this.bYear = bYear;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public int getId() {
+        return id;
     }
 
     public String getName() {
         return name;
-    }
-
-    public String getPatronymic() {
-        return patronymic;
     }
 
     public String getLastName() {
@@ -67,10 +26,6 @@ public class ContactDataParametrs{
         return nickName;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
     public String getCountry() {
         return country;
     }
@@ -79,20 +34,34 @@ public class ContactDataParametrs{
         return phone;
     }
 
-    public String getMail() {
-        return mail;
+    public ContactDataParametrs withId(int id) {
+        this.id = id;
+        return this;
     }
 
-    public String getbDay() {
-        return bDay;
+    public ContactDataParametrs withName(String name) {
+        this.name = name;
+        return this;
     }
 
-    public String getbMonth() {
-        return bMonth;
+    public ContactDataParametrs withLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
     }
 
-    public String getbYear() {
-        return bYear;
+    public ContactDataParametrs withNickName(String nickName) {
+        this.nickName = nickName;
+        return this;
+    }
+
+    public ContactDataParametrs withCountry(String country) {
+        this.country = country;
+        return this;
+    }
+
+    public ContactDataParametrs withPhone(String phone) {
+        this.phone = phone;
+        return this;
     }
 
     @Override
@@ -100,7 +69,6 @@ public class ContactDataParametrs{
         return "ContactDataParametrs{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", patronymic='" + patronymic + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';
     }
@@ -119,10 +87,4 @@ public class ContactDataParametrs{
     public int hashCode() {
         return Objects.hash(id, name, lastName);
     }
-
-    public int getId() {
-        return id;
-    }
-
-
 }

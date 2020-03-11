@@ -4,31 +4,13 @@ import java.util.Objects;
 
 public class GroupDataParametrs {
 
-    public int id;
-    public final String name;
-    public final String header;
-    public final String footer;
-
-    public GroupDataParametrs(String name, String header, String footer) {
-        this.id = Integer.MAX_VALUE;
-        this.name = name;
-        this.header = header;
-        this.footer = footer;
-    }
-
-    public GroupDataParametrs(int id,String name, String header, String footer) {
-        this.id = id;
-        this.name = name;
-        this.header = header;
-        this.footer = footer;
-    }
+    public int id = Integer.MAX_VALUE;;
+    public String name;
+    public String header;
+    public String footer;
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id){
-        this.id = id;
     }
 
     public String getName() {
@@ -41,6 +23,26 @@ public class GroupDataParametrs {
 
     public String getFooter() {
         return footer;
+    }
+
+    public GroupDataParametrs withId(int id){
+        this.id = id;
+        return this;
+    }
+
+    public GroupDataParametrs withName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public GroupDataParametrs withHeader(String header) {
+        this.header = header;
+        return this;
+    }
+
+    public GroupDataParametrs withFooter(String footer) {
+        this.footer = footer;
+        return this;
     }
 
     @Override

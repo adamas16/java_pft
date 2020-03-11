@@ -49,6 +49,7 @@ public class GroupHelper extends HelperBase {
         fillGroupForm(groupDataParametrs);
         submitGroupCreation();
         goTo.returnToGroupPage();
+        goTo.mainPage();
     }
 
     public boolean isThereAGroup() {
@@ -56,7 +57,7 @@ public class GroupHelper extends HelperBase {
     }
 
     public void exists(GroupDataParametrs group) {
-        goTo.gotoGroupPage();
+        goTo.groupPage();
         if (!isThereAGroup()) {
             create(group);
         }
@@ -68,16 +69,17 @@ public class GroupHelper extends HelperBase {
     }
 
     public List<GroupDataParametrs> list() {
-        List <GroupDataParametrs> groups = new ArrayList <GroupDataParametrs>();
-        List <WebElement> elements = driver.findElements(By.cssSelector("span.group"));
-        for (WebElement element: elements){
-            String name = element.getText();
-            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            GroupDataParametrs group = new GroupDataParametrs(id, name, null,null);
-            groups.add(group);
+        List<GroupDataParametrs> groups = new ArrayList<GroupDataParametrs>();
+        List<WebElement> elements = driver.findElements(By.cssSelector("span.group"));
+        for (WebElement element : elements){
+            String name=element.getText();
+            int  id=Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            groups.add(new GroupDataParametrs().withId(id).withName(name));
         }
         return groups;
     }
+
+
     public void modifyGroup(int index, GroupDataParametrs group) {
 
 //      выбор группы

@@ -17,10 +17,10 @@ public class ContactDeletionTest extends TestBase{
         if(app.contact().list().size() == 0){
 
 //          создание группы при её отсутствии
-            app.group().exists(new GroupDataParametrs("test1", "test2", "test3"));
+            app.group().exists(new GroupDataParametrs().withName("test1").withHeader("test2").withFooter("test3"));
 
 //          создание контакта при его отсутствии
-            app.contact().create(new ContactDataParametrs("Dmitriy", "Sergeevich", "Romanov", "arrnel", "random title", "Russia", "+7(658)4853568", "random@mail.org", "4", "July", "1954"), true);
+            app.contact().create(new ContactDataParametrs().withName("Dmitriy").withLastName("Romanov").withNickName( "arrnel").withCountry("Russia").withPhone("+7(658)4853568"), true);
             System.out.println("Контакт создан");
         }
 
