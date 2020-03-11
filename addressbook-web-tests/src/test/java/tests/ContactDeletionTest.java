@@ -9,41 +9,38 @@ import java.util.List;
 
 public class ContactDeletionTest extends TestBase{
 
-    public List<ContactDataParametrs> contactCountBefore;
-    public List<ContactDataParametrs> contactCountAfter;
+    public List<ContactDataParametrs> before;
+    public List<ContactDataParametrs> after;
     @Test
     public void testContactDeletion(){
 //        проверка наличия контакта
-        if(!app.getContactHelper().isThereAContact()){
+        if(app.contact().list().size() == 0){
 
 //          создание группы при её отсутствии
-            app.getGroupHelper().checkGroupExists(new GroupDataParametrs("test1", "test2", "test3"));
+            app.group().exists(new GroupDataParametrs("test1", "test2", "test3"));
 
 //          создание контакта при его отсутствии
-            app.getContactHelper().createContact(new ContactDataParametrs("Dmitriy", "Sergeevich", "Romanov", "arrnel", "random title", "Russia", "+7(658)4853568", "random@mail.org", "4", "July", "1954"), true);
+            app.contact().create(new ContactDataParametrs("Dmitriy", "Sergeevich", "Romanov", "arrnel", "random title", "Russia", "+7(658)4853568", "random@mail.org", "4", "July", "1954"), true);
             System.out.println("Контакт создан");
         }
 
 //      Получаем количество контактов
-        contactCountBefore = app.getContactHelper().getContactList();
+        before = app.contact().list();
 
-//      выбор контакта
-        app.getContactHelper().selectContact(contactCountBefore.size() - 1);
+        int index = before.size() - 1;
 
-//      нажатие на кнопку удаления контакта
-        app.getContactHelper().submitContactDeletion();
-
-//      возврат на главную страницу
-        app.getNavigationHelper().gotoMainPage();
+        app.contact().delete(index);
 
 //      Получаем количество контактов
-        contactCountAfter = app.getContactHelper().getContactList();
+        after = app.contact().list();
 
 //      Проверяем количество контактов до и после
-        Assert.assertEquals(contactCountBefore.size(), contactCountAfter.size() + 1);
+        Assert.assertEquals(before.size(), after.size() + 1);
 
-        contactCountBefore.remove(contactCountBefore.size() -1);
-        Assert.assertEquals(contactCountBefore,contactCountAfter);
+        before.remove(index);
+        Assert.assertEquals(before,after);
     }
+
+
 
 }

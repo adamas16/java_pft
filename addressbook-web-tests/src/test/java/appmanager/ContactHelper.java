@@ -4,10 +4,8 @@ import addressbook_tests_parametrs.ContactDataParametrs;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-import java.nio.file.WatchEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +15,7 @@ public class ContactHelper extends HelperBase{
         super(driver);
     }
 
-    private NavigationHelper navigationHelper = new NavigationHelper(driver);
+    private NavigationHelper goTo = new NavigationHelper(driver);
 
     public void submitContactDeletion(){
         click(By.xpath("//input[@value=\"Delete\"]"));
@@ -68,7 +66,7 @@ public class ContactHelper extends HelperBase{
         click(By.xpath("//input[@name=\"update\"]"));
     }
 
-    public void createContact(ContactDataParametrs contactDataParametrs, boolean creation) {
+    public void create(ContactDataParametrs contactDataParametrs, boolean creation) {
         initContactCreation();
         fillContactForm(contactDataParametrs,creation);
         submitContactCreation();
@@ -84,7 +82,7 @@ public class ContactHelper extends HelperBase{
         return isElementPresent(By.xpath("//img[@title=\"Details\"]"));
     }
 
-    public List<ContactDataParametrs> getContactList() {
+    public List<ContactDataParametrs> list() {
         List<ContactDataParametrs> contacts = new ArrayList<ContactDataParametrs>();
         List<WebElement> elements = driver.findElements(By.name("entry"));
         for (WebElement element : elements) {
@@ -100,7 +98,7 @@ public class ContactHelper extends HelperBase{
         return contacts;
     }
 
-    public void modifyContact(int index, ContactDataParametrs contact) {
+    public void modify(int index, ContactDataParametrs contact) {
 //      нажатие на кнопку редактировать
         initContactEdition(index);
 
@@ -110,6 +108,34 @@ public class ContactHelper extends HelperBase{
 //      нажать на обновить контактupdateButton();
 
 //      возврат на главную страницу
-        navigationHelper.gotoMainPage();
+        goTo.gotoMainPage();
     }
+
+    public void delete(int index) {
+//      выбор контакта
+        selectContact(index);
+
+//      нажатие на кнопку удаления контакта
+        submitContactDeletion();
+
+//      возврат на главную страницу
+        goTo.gotoMainPage();
+    }
+
+    public void createContact(ContactDataParametrs contact) {
+//      добавляем контакт
+        initContactCreation();
+
+//      заполнение формы
+        fillContactForm(contact, true);
+
+//      нажать на подтверждение создание контакта
+        submitContactCreation();
+
+//      возврат на главную страницу
+        goTo.gotoMainPage();
+
+
+    }
+
 }

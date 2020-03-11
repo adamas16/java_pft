@@ -10,7 +10,7 @@ import java.util.List;
 
 public class GroupHelper extends HelperBase {
 
-    private NavigationHelper navigationHelper = new NavigationHelper(driver);
+    private NavigationHelper goTo = new NavigationHelper(driver);
     private ContactHelper contactHelper = new ContactHelper(driver);
 
     public GroupHelper(WebDriver driver) {
@@ -44,21 +44,21 @@ public class GroupHelper extends HelperBase {
         click(By.name("submit"));
     }
 
-    public void createGroup(GroupDataParametrs groupDataParametrs) {
+    public void create(GroupDataParametrs groupDataParametrs) {
         initGroupCreation();
         fillGroupForm(groupDataParametrs);
         submitGroupCreation();
-        navigationHelper.returnToGroupPage();
+        goTo.returnToGroupPage();
     }
 
     public boolean isThereAGroup() {
         return isElementPresent(By.name("selected[]"));
     }
 
-    public void checkGroupExists(GroupDataParametrs group) {
-        navigationHelper.gotoGroupPage();
+    public void exists(GroupDataParametrs group) {
+        goTo.gotoGroupPage();
         if (!isThereAGroup()) {
-            createGroup(group);
+            create(group);
         }
         contactHelper.gotoHomePage();
     }
@@ -67,7 +67,7 @@ public class GroupHelper extends HelperBase {
         return getElementsCount(By.xpath("//input[@name=\"selected[]\"]"));
     }
 
-    public List<GroupDataParametrs> getGroupList() {
+    public List<GroupDataParametrs> list() {
         List <GroupDataParametrs> groups = new ArrayList <GroupDataParametrs>();
         List <WebElement> elements = driver.findElements(By.cssSelector("span.group"));
         for (WebElement element: elements){
@@ -93,6 +93,32 @@ public class GroupHelper extends HelperBase {
         contactHelper.updateButton();
 
 //      возврат на страницу с группами
-        navigationHelper.returnToGroupPage();
+        goTo.returnToGroupPage();
     }
+
+    public void createGroup(GroupDataParametrs group) {
+//      Нажатие на кнопку добавления группы
+        initGroupCreation();
+
+//      заполнение формы
+        fillGroupForm(group);
+
+//      Нажатие на кнопку создания группы
+        submitGroupCreation();
+
+//      Возврат на страницу группы
+        goTo.returnToGroupPage();
+    }
+
+    public void delete(int index) {
+//      выбор группы
+        selectGroup(index);
+
+//      подтверждение удаления
+        submitGroupDeletion();
+
+//      возврат на страницу с группами
+        goTo.returnToGroupPage();
+    }
+
 }
