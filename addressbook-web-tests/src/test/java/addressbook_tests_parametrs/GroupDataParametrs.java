@@ -30,6 +30,7 @@ public class GroupDataParametrs {
         return this;
     }
 
+
     public GroupDataParametrs withName(String name) {
         this.name = name;
         return this;
@@ -58,12 +59,14 @@ public class GroupDataParametrs {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GroupDataParametrs that = (GroupDataParametrs) o;
-        return Objects.equals(name, that.name);
+        return id == that.id &&
+                Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(id, name);
     }
+
 
 }

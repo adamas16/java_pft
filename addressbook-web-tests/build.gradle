@@ -9,6 +9,7 @@ dependencies {
     compile 'org.seleniumhq.selenium:selenium-java:4.0.0-alpha-3'
     compile group: 'io.qameta.allure', name: 'allure-junit4', version: '2.13.2'
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
+    implementation 'org.hamcrest:java-hamcrest:2.0.0.0'
 }
 
 test {

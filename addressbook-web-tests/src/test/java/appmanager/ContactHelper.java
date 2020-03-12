@@ -1,6 +1,8 @@
 package appmanager;
 
 import addressbook_tests_parametrs.ContactDataParametrs;
+import addressbook_tests_parametrs.Contacts;
+import addressbook_tests_parametrs.Groups;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -91,19 +93,6 @@ public class ContactHelper extends HelperBase{
             contacts.add(new ContactDataParametrs().withId(id).withName(name).withLastName(lastname));
         }
         return contacts;
-//        List<ContactDataParametrs> contacts = new ArrayList<ContactDataParametrs>();
-//        List<WebElement> elements = driver.findElements(By.name("entry"));
-//        for (WebElement element : elements) {
-//            List<WebElement> contactEntryList = element.findElements(By.cssSelector("td"));
-//            WebElement nameCell = contactEntryList.get(2);
-//            String name = nameCell.getText();
-//            WebElement lastnameCell = contactEntryList.get(1);
-//            String lastname = lastnameCell.getText();
-//            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
-//            ContactDataParametrs contact = new ContactDataParametrs(name, "Sergeevich", lastname,null, null, null, null, null,null, null, null);
-//            contacts.add(contact);
-//        }
-//        return contacts;
     }
 
     public void modify(ContactDataParametrs contact) {
@@ -145,8 +134,8 @@ public class ContactHelper extends HelperBase{
         goTo.mainPage();
     }
 
-    public Set<ContactDataParametrs> all() {
-        Set<ContactDataParametrs> contacts = new HashSet<ContactDataParametrs>();
+    public Contacts all() {
+        Contacts contacts = new Contacts();
         List<WebElement> elements = driver.findElements(By.name("entry"));
         for (WebElement element : elements) {
             List<WebElement> cells = element.findElements(By.xpath("td"));

@@ -1,12 +1,15 @@
 package appmanager;
 
 import addressbook_tests_parametrs.GroupDataParametrs;
+import addressbook_tests_parametrs.Groups;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GroupHelper extends HelperBase {
 
@@ -26,6 +29,10 @@ public class GroupHelper extends HelperBase {
 
     public void selectGroup(int index) {
         driver.findElements(By.name("selected[]")).get(index).click();
+    }
+
+    public void selectGroupById(int id) {
+        driver.findElement(By.cssSelector("input[value='"+id+"'")).click();
     }
 
     public void submitGroupDeletion() {
@@ -68,22 +75,31 @@ public class GroupHelper extends HelperBase {
         return getElementsCount(By.xpath("//input[@name=\"selected[]\"]"));
     }
 
-    public List<GroupDataParametrs> list() {
-        List<GroupDataParametrs> groups = new ArrayList<GroupDataParametrs>();
-        List<WebElement> elements = driver.findElements(By.cssSelector("span.group"));
+    public Groups all() {
+//        Groups groups = new Groups();
+//        List<WebElement> elements = driver.findElements(By.cssSelector("span.group"));
+//        for (WebElement element : elements){
+//            String name=element.getText();
+//            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+//            groups.add(new GroupDataParametrs().withId(id).withName(name));
+        Groups groups=new Groups();
+        //получаем список объектоа типа WebElement
+        //найти все элементы с тегом span и классoм group
+        List<WebElement> elements = driver.findElements(By.cssSelector("span.group"));//это эл-т, внутри кот чек-бокс
+        //element пробегает по спискус elements и из каждого элемента получаем текст имя группы
         for (WebElement element : elements){
             String name=element.getText();
-            int  id=Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            int  id=Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));//идентификатор, кот передаем в конструктор
             groups.add(new GroupDataParametrs().withId(id).withName(name));
         }
         return groups;
     }
 
 
-    public void modifyGroup(int index, GroupDataParametrs group) {
+    public void modifyGroup (GroupDataParametrs group) {
 
 //      выбор группы
-        selectGroup(index);
+        selectGroupById(group.getId());
 
 //      нажатие на кнопку изменить
         submitGroupEdition();
@@ -123,4 +139,9 @@ public class GroupHelper extends HelperBase {
         goTo.returnToGroupPage();
     }
 
+    public void delete(GroupDataParametrs group) {
+        selectGroupById(group.getId());
+        submitGroupDeletion();
+        goTo.returnToGroupPage();
+    }
 }
