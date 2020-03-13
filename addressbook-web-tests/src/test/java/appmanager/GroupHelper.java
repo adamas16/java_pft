@@ -73,7 +73,7 @@ public class GroupHelper extends HelperBase {
         contactHelper.gotoHomePage();
     }
 
-    public int groupCount() {
+    public int count() {
         return getElementsCount(By.xpath("//input[@name=\"selected[]\"]"));
     }
 

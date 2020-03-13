@@ -77,6 +77,9 @@ public class ContactHelper extends HelperBase{
         refresh();
     }
 
+    public int count() {
+        return driver.findElements(By.name("selected[]")).size();// получаем размер списка элементов
+    }
     public void gotoHomePage() {
         click(By.linkText("home"));
     }
