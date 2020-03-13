@@ -16,6 +16,8 @@ public class GroupHelper extends HelperBase {
     private NavigationHelper goTo = new NavigationHelper(driver);
     private ContactHelper contactHelper = new ContactHelper(driver);
 
+    private Groups groupCache;
+
     public GroupHelper(WebDriver driver) {
         super(driver);
     }
@@ -76,23 +78,18 @@ public class GroupHelper extends HelperBase {
     }
 
     public Groups all() {
-//        Groups groups = new Groups();
-//        List<WebElement> elements = driver.findElements(By.cssSelector("span.group"));
-//        for (WebElement element : elements){
-//            String name=element.getText();
-//            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-//            groups.add(new GroupDataParametrs().withId(id).withName(name));
-        Groups groups=new Groups();
-        //получаем список объектоа типа WebElement
-        //найти все элементы с тегом span и классoм group
-        List<WebElement> elements = driver.findElements(By.cssSelector("span.group"));//это эл-т, внутри кот чек-бокс
-        //element пробегает по спискус elements и из каждого элемента получаем текст имя группы
+
+        if (groupCache != null){
+            return new Groups(groupCache);
+        }
+        groupCache = new Groups();
+        List<WebElement> elements = driver.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements){
             String name=element.getText();
-            int  id=Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));//идентификатор, кот передаем в конструктор
-            groups.add(new GroupDataParametrs().withId(id).withName(name));
+            int  id=Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            groupCache.add(new GroupDataParametrs().withId(id).withName(name));
         }
-        return groups;
+        return new Groups (groupCache);
     }
 
 
@@ -110,6 +107,8 @@ public class GroupHelper extends HelperBase {
 //      подтверждение изменения
         contactHelper.updateButton();
 
+        groupCache = null;
+
 //      возврат на страницу с группами
         goTo.returnToGroupPage();
     }
@@ -123,6 +122,8 @@ public class GroupHelper extends HelperBase {
 
 //      Нажатие на кнопку создания группы
         submitGroupCreation();
+
+        groupCache = null;
 
 //      Возврат на страницу группы
         goTo.returnToGroupPage();
@@ -142,6 +143,7 @@ public class GroupHelper extends HelperBase {
     public void delete(GroupDataParametrs group) {
         selectGroupById(group.getId());
         submitGroupDeletion();
+        groupCache = null;
         goTo.returnToGroupPage();
     }
 }
